@@ -64,6 +64,7 @@ export class ArticlesFormComponent implements OnInit{
 
         if(this.isEditing && this.articleId)
         {
+          data.id = this.articleId;
           this.EditArticle(this.articleId, data);;
         }else
         {

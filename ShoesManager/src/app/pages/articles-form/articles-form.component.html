@@ -1,1 +1,59 @@
-<p>articles-form works!</p>
+<div class="container">
+    <h2 *ngIf="!isEditing">📝 Crear Artículo</h2>
+    <h2 *ngIf="isEditing">✏️ Editar Artículo</h2>
+  
+    <form [formGroup]="articleForm" (ngSubmit)="SendData()">
+      
+      <!-- Nombre del artículo -->
+      <div class="form-group">
+        <label for="name">Nombre del Artículo:</label>
+        <input id="name" formControlName="name" required class="form-control" />
+        <div *ngIf="articleForm.controls['name'].invalid && articleForm.controls['name'].touched" class="error">
+          ⚠️ El nombre es obligatorio.
+        </div>
+      </div>
+  
+      <!-- Precio -->
+      <div class="form-group">
+        <label for="price">Precio:</label>
+        <input id="price" type="number" formControlName="price" required class="form-control" />
+        <div *ngIf="articleForm.controls['price'].invalid && articleForm.controls['price'].touched" class="error">
+          ⚠️ El precio es obligatorio.
+        </div>
+      </div>
+  
+      <!-- Total en estante -->
+      <div class="form-group">
+        <label for="totalInShelf">Total en Estante:</label>
+        <input id="totalInShelf" type="number" formControlName="totalInShelf" required class="form-control" />
+        <div *ngIf="articleForm.controls['totalInShelf'].invalid && articleForm.controls['totalInShelf'].touched" class="error">
+          ⚠️ Este campo es obligatorio.
+        </div>
+      </div>
+  
+      <!-- Total en bodega -->
+      <div class="form-group">
+        <label for="totalInVault">Total en Bodega:</label>
+        <input id="totalInVault" type="number" formControlName="totalInVault" required class="form-control" />
+        <div *ngIf="articleForm.controls['totalInVault'].invalid && articleForm.controls['totalInVault'].touched" class="error">
+          ⚠️ Este campo es obligatorio.
+        </div>
+      </div>
+  
+      <!-- ID de la tienda -->
+      <div class="form-group">
+        <label for="storeId">ID de la Tienda:</label>
+        <input id="storeId" type="number" formControlName="storeId" required class="form-control" />
+        <div *ngIf="articleForm.controls['storeId'].invalid && articleForm.controls['storeId'].touched" class="error">
+          ⚠️ El ID de la tienda es obligatorio.
+        </div>
+      </div>
+  
+      <!-- Botón de acción -->
+      <button type="submit" [disabled]="articleForm.invalid" class="btn btn-primary">
+        {{ isEditing ? '✅ Actualizar Artículo' : '➕ Crear Artículo' }}
+      </button>
+  
+    </form>
+  </div>
+  
