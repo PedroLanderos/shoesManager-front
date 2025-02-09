@@ -1,1 +1,33 @@
-<p>stores-form works!</p>
+<div class="container">
+  <h2 *ngIf="!isEditing">🛍️ Crear Tienda</h2>
+  <h2 *ngIf="isEditing">✏️ Editar Tienda</h2>
+
+  <form [formGroup]="storeForm" (ngSubmit)="saveStore()">
+    
+    <!-- Nombre de la tienda -->
+    <div class="form-group">
+      <label for="name">Nombre de la Tienda:</label>
+      <input id="name" formControlName="name" required class="form-control" />
+      <div *ngIf="storeForm.controls['name'].invalid && storeForm.controls['name'].touched" class="error">
+        ⚠️ El nombre es obligatorio.
+      </div>
+    </div>
+
+    <!-- Dirección de la tienda -->
+    <div class="form-group">
+      <label for="address">Dirección:</label>
+      <input id="address" formControlName="address" required class="form-control" />
+      <div *ngIf="storeForm.controls['address'].invalid && storeForm.controls['address'].touched" class="error">
+        ⚠️ La dirección es obligatoria.
+      </div>
+    </div>
+
+    <!-- Botón de acción -->
+    <button type="submit" [disabled]="storeForm.invalid" class="btn btn-primary">
+      {{ isEditing ? '✅ Actualizar Tienda' : '➕ Crear Tienda' }}
+    </button>
+
+    
+
+  </form>
+</div>

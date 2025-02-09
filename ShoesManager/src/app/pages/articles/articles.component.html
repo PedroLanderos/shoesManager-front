@@ -1,1 +1,24 @@
-<p>articles works!</p>
+<h2>Articles</h2>
+<a routerLink="/articles/new">Add New Article</a>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Total in Shelf</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let article of articles">
+      <td>{{ article.name }}</td>
+      <td>{{ article.price }}</td>
+      <td>{{ article.totalInShelf }}</td>
+      <td>
+        <a [routerLink]="['/articles', article.id]">Details</a> |
+        <a [routerLink]="['/articles/edit', article.id]">Edit</a> |
+        <button (click)="deleteArticle(article.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

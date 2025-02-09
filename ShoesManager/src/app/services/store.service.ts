@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Interface } from 'readline';
+
+export interface Store
+{
+  id:number;
+  name:string;
+  address:string;
+}
 
 @Injectable({
   providedIn: 'root'

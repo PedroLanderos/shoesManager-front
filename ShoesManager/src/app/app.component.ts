@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ArticleService } from './services/article.service';
+import { StoreService } from './services/store.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +11,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  articleService = inject(ArticleService);
+  storeServce = inject(StoreService);
   title = 'ShoesManager';
 }

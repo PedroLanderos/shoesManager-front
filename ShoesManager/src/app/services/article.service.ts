@@ -1,33 +1,42 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+export interface Article {
+  id: number;
+  name: string;
+  description?: string;
+  price: number;
+  totalInShelf: number;
+  totalInVault: number;
+  storeId: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
+  private http = inject(HttpClient);
+  private apiUrl = "http://localhost:5002/api/article"; // Corregido para que apunte al endpoint correcto
 
-  private apiUrl = "url";
 
-  constructor(private http: HttpClient) { }
-
-  getAllArticles(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  public getAll(): Observable<Article[]> {
+    return this.http.get<any>(this.apiUrl);
   }
 
-  getArticleById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getById(id: number): Observable<Article> {
+    return this.http.get<Article>(`${this.apiUrl}/${id}`);
   }
 
-  createArticle(article: any): Observable<any> {
+  create(article: Article): Observable<any> {
     return this.http.post(this.apiUrl, article);
   }
 
-  updateArticle(id: number, article: any): Observable<any> {
+  update(id: number, article: Article): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, article);
   }
 
-  deleteArticle(id: number): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
